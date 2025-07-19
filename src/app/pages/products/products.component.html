@@ -1,0 +1,89 @@
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Tiêu đề -->
+    <h1 class="text-3xl font-bold mb-4">Sản phẩm</h1>
+
+   <!-- Filter + Search -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <!-- Search -->
+    <div class="md:col-span-1">
+        <input
+            type="text"
+            placeholder="Tìm sản phẩm..."
+            class="w-full border border-blue-300 bg-blue-50 text-blue-900 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+        />
+    </div>
+
+    <!-- Danh mục -->
+    <div class="md:col-span-1">
+        <select
+            class="w-full border border-blue-300 bg-blue-50 text-blue-900 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+            <option>Tất cả danh mục</option>
+            <option>Hộp thiền</option>
+            <option>Nhạc thiền</option>
+            <option>Phụ kiện</option>
+            <option>Trà đạo</option>
+        </select>
+    </div>
+
+    <!-- Sắp xếp -->
+    <div class="md:col-span-1">
+        <select
+            class="w-full border border-blue-300 bg-blue-50 text-blue-900 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+            <option>Sắp xếp theo</option>
+            <option>Mới nhất</option>
+            <option>Giá tăng dần</option>
+            <option>Giá giảm dần</option>
+            <option>Bán chạy</option>
+        </select>
+    </div>
+
+    <!-- Tags -->
+    <div class="md:col-span-1">
+        <div class="flex flex-wrap gap-2">
+            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm cursor-pointer">Thư giãn</span>
+            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm cursor-pointer">Trà đạo</span>
+            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm cursor-pointer">Âm nhạc</span>
+            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm cursor-pointer">Phụ kiện</span>
+        </div>
+    </div>
+</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div *ngFor="let product of products"
+            class="bg-gradient-to-br from-blue-50 to-sky-50 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-hidden group">
+            <div class="relative overflow-hidden " 
+            [routerLink]="['/product', product.id]"
+>
+                <img [src]="product.image" [alt]="product.name"
+                    class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2">
+                    <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="p-6">
+                <h4 class="text-xl font-bold text-gray-800 mb-2">{{product.name}}</h4>
+                <p class="text-gray-600 mb-4 text-sm leading-relaxed">{{product.description}}</p>
+                <div class="flex items-center justify-between">
+                    <span
+                        class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-sky-600">
+                        {{product.price}}
+                    </span>
+                    <button
+                        class="bg-gradient-to-r from-blue-500 to-sky-600 hover:from-blue-600 hover:to-sky-700 text-white px-4 py-2 rounded-full text-sm font-semibold transform hover:scale-105 transition-all duration-200 flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6 0v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01">
+                            </path>
+                        </svg>
+                        <span>Thêm vào giỏ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

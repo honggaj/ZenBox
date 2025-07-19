@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-blue-50 text-gray-800 py-10 px-4">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Cột 1: Sản phẩm chính -->
+    <div class="md:col-span-2 space-y-6">
+      <img [src]="product.image" alt="Ảnh sản phẩm" class="rounded-2xl shadow-lg w-full object-cover h-96" />
+
+      <h1 class="text-3xl font-bold text-blue-700">{{ product.name }}</h1>
+      <p class="text-xl font-semibold text-blue-600">{{ product.price | currency:'VND' }}</p>
+      <p class="text-base leading-relaxed text-gray-700">
+        {{ product.description }}
+      </p>
+
+      <!-- Icon dịch vụ -->
+      <div class="flex flex-wrap gap-6 mt-4">
+        <div class="flex items-center gap-2">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 6h18M3 14h18M3 18h18" />
+          </svg>
+          <span class="text-sm text-gray-700">Giao hàng nhanh</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 11c0-1.1.9-2 2-2s2 .9 2 2v2a2 2 0 01-2 2h-2v2m0-6V7a2 2 0 012-2h2" />
+          </svg>
+          <span class="text-sm text-gray-700">Đổi trả dễ dàng</span>
+        </div>
+      </div>
+
+      <!-- Nút giỏ hàng -->
+      <button (click)="addToCart()"
+        class="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full shadow-md transition duration-300">
+        🛒 Thêm vào giỏ hàng
+      </button>
+    </div>
+
+    <!-- Cột 2: Sản phẩm nhỏ -->
+    <div class="space-y-4">
+      <h2 class="text-lg font-semibold text-blue-600">Sản phẩm khác</h2>
+      <div *ngFor="let p of products"
+        class="flex items-center gap-3 hover:bg-blue-100 p-3 rounded-lg cursor-pointer transition duration-200">
+        <img [src]="p.image" class="w-14 h-14 object-cover rounded-md shadow" />
+        <span class="text-sm font-medium text-gray-700">{{ p.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dịch vụ: 4 icon hàng ngang -->
+  <div class="max-w-6xl mx-auto mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div class="bg-white rounded-xl shadow p-6 space-y-2">
+      <div class="text-4xl text-blue-600">🚚</div>
+      <h4 class="font-bold text-blue-800">Giao hàng toàn quốc</h4>
+      <p class="text-sm text-gray-600">Nhanh chóng, an toàn và tiện lợi</p>
+    </div>
+    <div class="bg-white rounded-xl shadow p-6 space-y-2">
+      <div class="text-4xl text-blue-600">🔒</div>
+      <h4 class="font-bold text-blue-800">Thanh toán bảo mật</h4>
+      <p class="text-sm text-gray-600">Nhiều phương thức thanh toán linh hoạt</p>
+    </div>
+    <div class="bg-white rounded-xl shadow p-6 space-y-2">
+      <div class="text-4xl text-blue-600">💬</div>
+      <h4 class="font-bold text-blue-800">Hỗ trợ 24/7</h4>
+      <p class="text-sm text-gray-600">Tư vấn miễn phí mọi lúc mọi nơi</p>
+    </div>
+    <div class="bg-white rounded-xl shadow p-6 space-y-2">
+      <div class="text-4xl text-blue-600">✅</div>
+      <h4 class="font-bold text-blue-800">Cam kết chất lượng</h4>
+      <p class="text-sm text-gray-600">Sản phẩm chính hãng 100%</p>
+    </div>
+  </div>
+</div>
