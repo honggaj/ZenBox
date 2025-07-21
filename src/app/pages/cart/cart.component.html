@@ -1,9 +1,15 @@
 <div class="p-6 space-y-6 max-w-4xl mx-auto">
   <h2 class="text-3xl font-bold text-blue-700 text-center">🛒 Giỏ hàng ZenBox</h2>
 
-  <div *ngFor="let product of products" class="flex flex-col sm:flex-row gap-4 items-center border border-blue-200 p-4 rounded-xl shadow-md hover:shadow-lg transition">
+  <!-- Hiển thị thông báo nếu giỏ hàng trống -->
+  <div *ngIf="cartProducts.length === 0" class="text-center text-gray-500 py-10">
+    Giỏ hàng của bạn đang trống. Hãy thêm một vài sản phẩm nhé!
+  </div>
+
+  <!-- Lặp qua các sản phẩm trong giỏ hàng (cartProducts) -->
+  <div *ngFor="let product of cartProducts" class="flex flex-col sm:flex-row gap-4 items-center border border-blue-200 p-4 rounded-xl shadow-md hover:shadow-lg transition">
     <img [src]="product.image" alt="{{product.name}}" class="w-full sm:w-28 h-28 object-cover rounded-md" />
-    
+
     <div class="flex-1 w-full">
       <h3 class="text-lg font-semibold text-blue-800">{{ product.name }}</h3>
       <p class="text-sm text-gray-600">{{ product.description }}</p>
@@ -12,7 +18,9 @@
         <button (click)="decrease(product)" class="bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200">−</button>
         <span class="font-semibold">{{ product.quantity }}</span>
         <button (click)="increase(product)" class="bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200">+</button>
-        
+
+        <!-- Hiển thị giá của từng sản phẩm (đã nhân với số lượng nếu muốn) -->
+        <!-- Nếu bạn muốn hiển thị tổng tiền của từng sản phẩm: {{ (product.price * product.quantity) | number }}đ -->
         <span class="ml-auto text-green-600 font-semibold">{{ product.price | number }}đ</span>
       </div>
     </div>
@@ -20,13 +28,15 @@
     <button (click)="remove(product.id)" class="text-red-500 hover:text-red-700 font-bold">X</button>
   </div>
 
-  <div class="text-right text-xl font-bold text-blue-800 border-t pt-4">
+  <!-- Hiển thị tổng cộng chỉ khi có sản phẩm trong giỏ hàng -->
+  <div *ngIf="cartProducts.length > 0" class="text-right text-xl font-bold text-blue-800 border-t pt-4">
     Tổng cộng: {{ getTotal() | number }}đ
   </div>
 
-  <div class="text-right">
-    <button class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition">
-      Thanh toán
-    </button>
-  </div>
+  <!-- Nút thanh toán chỉ khi có sản phẩm trong giỏ hàng -->
+<div *ngIf="cartProducts.length > 0" class="text-right">
+  <button routerLink="/checkout" class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition">
+    Thanh toán
+  </button>
+</div>
 </div>

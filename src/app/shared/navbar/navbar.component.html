@@ -4,11 +4,14 @@
 
   <!-- Desktop Menu -->
   <ul class="hidden md:flex space-x-6 font-medium text-gray-700">
-    <li><a routerLink="/" routerLinkActive="text-blue-500">Trang chủ</a></li>
+    <li>
+      <a routerLink="/" routerLinkActive="text-blue-500" [routerLinkActiveOptions]="{ exact: true }">Trang chủ</a>
+    </li>
     <li><a routerLink="/products" routerLinkActive="text-blue-500">Sản phẩm</a></li>
     <li><a routerLink="/zen-music" routerLinkActive="text-blue-500">Nhạc thiền</a></li>
     <li><a routerLink="/about" routerLinkActive="text-blue-500">Giới thiệu</a></li>
     <li><a routerLink="/contact" routerLinkActive="text-blue-500">Liên hệ</a></li>
+    <li><a routerLink="/order-history" routerLinkActive="text-blue-500">Lịch sử đặt hàng</a></li>
     <li><a routerLink="/cart" routerLinkActive="text-blue-500">🛒</a></li>
   </ul>
 
@@ -38,6 +41,7 @@
     <a routerLink="/zen-music" (click)="closeMenu()" routerLinkActive="text-blue-500">🎵 Nhạc thiền</a>
     <a routerLink="/about" (click)="closeMenu()" routerLinkActive="text-blue-500">ℹ️ Giới thiệu</a>
     <a routerLink="/contact" (click)="closeMenu()" routerLinkActive="text-blue-500">📞 Liên hệ</a>
-    <a routerLink="/cart" (click)="closeMenu()" routerLinkActive="text-blue-500">🛒 Giỏ hàng</a>
+    <a routerLink="/order-history" class="text-blue-700 font-semibold hover:underline">Lịch sử đặt hàng</a>
+    <a routerLink="/cart" (click)="closeMenu()" routerLinkActive="text-blue-500">🛒 Giỏ hàng</a> <!-- Đặt dòng này cuối cùng -->
   </div>
 </div>
