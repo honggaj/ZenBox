@@ -11,14 +11,14 @@ export class ZenMusicComponent {
     {
       title: 'Please Calm My Mind',
       description: 'Âm thanh thiên nhiên giúp bạn thư giãn và tập trung',
-      image: 'https://tse3.mm.bing.net/th/id/OIP.SfxkSh3ZvttK4oSDt53mgwAAAA?pid=Api&P=0&h=180',
+      image: 'https://tse2.mm.bing.net/th/id/OIP.SSgzdqb6IlTYq8p_mnXhbAHaEK?pid=Api&P=0&h=180',
       audioUrl: 'assets/audio/just-relax.mp3',
     },
     {
       //Just Relax
       title: 'Nhạc Thiền Buổi Sáng',
       description: 'Khởi đầu ngày mới với sự bình an',
-      image: 'https://cdn.quotesgram.com/img/63/61/1809198674-Just-Relax-Beach.jpg',
+      image: 'https://tse4.mm.bing.net/th/id/OIP.GfGhLfzrAWhQ672evIOo3QHaEK?pid=Api&P=0&h=180',
       audioUrl: 'assets/audio/just-relax.mp3',
     },
     // Add more nếu muốn
