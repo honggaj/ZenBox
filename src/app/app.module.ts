@@ -11,6 +11,10 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { FormsModule } from '@angular/forms';
+import { OrderHistoryComponent } from './pages/order-history/order-history.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,11 +26,15 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
     ContactComponent,
     CartComponent,
     NavbarComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CheckoutComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    CommonModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,43 +1,60 @@
-<div class="bg-blue-50 min-h-screen py-12 px-4">
-  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-8 space-y-6">
-    <h2 class="text-3xl font-bold text-blue-700 text-center mb-4">
-      <i class="fas fa-envelope-open-text text-blue-500 mr-2"></i>Liên hệ với ZenBox
-    </h2>
+<div class="max-w-6xl mx-auto p-6 space-y-8 bg-white rounded-lg shadow-xl my-8">
+  <h2 class="text-4xl font-extrabold text-purple-700 text-center mb-6">Lịch sử đặt hàng</h2>
 
-    <p class="text-center text-gray-600">
-      Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, đừng ngần ngại liên hệ với chúng tôi nhé 🌿
-    </p>
+  <div *ngIf="orders.length === 0" class="text-center text-gray-500 py-10">
+    Bạn chưa có đơn hàng nào. Hãy bắt đầu mua sắm nào!
+    <br>
+    <button routerLink="/products" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition">
+      Đi đến sản phẩm
+    </button>
+  </div>
 
-    <form class="space-y-4">
-      <div class="grid md:grid-cols-2 gap-4">
-        <input type="text" placeholder="Họ và tên" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 outline-none" />
-        <input type="email" placeholder="Email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 outline-none" />
+  <div *ngFor="let order of orders" class="border border-purple-200 rounded-lg p-6 bg-purple-50/50 shadow-md mb-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 pb-4 border-b border-purple-100">
+      <h3 class="text-2xl font-semibold text-purple-800">Đơn hàng #{{ order.orderId }}</h3>
+      <span class="text-gray-600 text-sm md:text-base">Ngày đặt: {{ order.orderDate }}</span>
+    </div>
+
+    <div class="mb-4">
+      <h4 class="text-lg font-medium text-purple-700 mb-2">Thông tin khách hàng:</h4>
+      <p><strong>Tên:</strong> {{ order.customerInfo.name }}</p>
+      <p><strong>Điện thoại:</strong> {{ order.customerInfo.phone }}</p>
+      <p><strong>Địa chỉ:</strong> {{ order.customerInfo.address }}</p>
+      <p *ngIf="order.customerInfo.email"><strong>Email:</strong> {{ order.customerInfo.email }}</p>
+      <p *ngIf="order.customerInfo.notes"><strong>Ghi chú:</strong> {{ order.customerInfo.notes }}</p>
+    </div>
+
+    <div class="mb-4">
+      <h4 class="text-lg font-medium text-purple-700 mb-2">Sản phẩm:</h4>
+      <div *ngFor="let item of order.items" class="flex items-center gap-4 py-2 border-t border-purple-100 first:border-t-0">
+        <img [src]="item.image" alt="{{item.name}}" class="w-12 h-12 object-cover rounded-md">
+        <div class="flex-1">
+          <p class="font-medium text-gray-800">{{ item.name }}</p>
+          <p class="text-sm text-gray-500">Số lượng: {{ item.quantity }} x {{ item.price | number }}đ</p>
+        </div>
+        <span class="font-semibold text-blue-600">{{ (item.price * item.quantity) | number }}đ</span>
       </div>
-      <input type="text" placeholder="Tiêu đề" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 outline-none" />
-      <textarea rows="5" placeholder="Nội dung liên hệ..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 outline-none"></textarea>
+    </div>
 
-      <div class="text-right">
-        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow">
-          <i class="fas fa-paper-plane mr-2"></i>Gửi liên hệ
-        </button>
-      </div>
-    </form>
-
-    <div class="mt-8 text-center text-sm text-gray-500">
-      <i class="fas fa-phone text-blue-500 mr-1"></i> Hotline: 0909 123 456 &nbsp; | &nbsp;
-      <i class="fas fa-map-marker-alt text-blue-500 mr-1"></i> 123 Zen Street, Quận Bình An, TP. Yên Bình
+    <div class="text-right text-xl font-bold text-purple-800 mt-4 pt-4 border-t border-purple-200">
+      Tổng cộng đơn hàng: {{ order.totalAmount | number }}đ
     </div>
   </div>
-</div>
-<div class="max-w-7xl mx-auto px-4 py-8">
-    <!-- ...phần sản phẩm và nội dung khác... -->
-</div> <!-- Đóng container sản phẩm -->
 
-<!-- Footer ngoài container, full width -->
-<footer class="bg-gray-900 text-gray-300 py-16">
+  <div class="text-center mt-8 space-x-4">
+    <button routerLink="/products" class="bg-gray-400 hover:bg-gray-500 text-white font-medium px-6 py-2 rounded-lg shadow-md transition">
+      <i class="fas fa-arrow-left mr-2"></i> Quay về trang sản phẩm
+    </button>
+    <button routerLink="/" class="bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-2 rounded-lg shadow-md transition">
+      <i class="fas fa-home mr-2"></i> Quay về trang chủ
+    </button>
+  </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+    </div> <footer class="bg-gray-900 text-gray-300 py-16">
   <div class="max-w-7xl mx-auto px-6 sm:px-12">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-      <!-- Brand -->
       <div class="md:col-span-2">
         <div class="flex items-center space-x-3 mb-6">
           <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-sky-600 rounded-xl flex items-center justify-center">
@@ -75,44 +92,41 @@
       </div>
 
       <div>
-  <h4 class="text-white font-semibold text-lg mb-6">Liên kết nhanh</h4>
-  <nav class="space-y-4">
-    <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-      </svg>
-      <span>Trang chủ</span>
-    </a>
-    <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/products">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-      </svg>
-      <span>Sản phẩm</span>
-    </a>
-    <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/zen-music">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-      </svg>
-      <span>Nhạc thiền</span>
-    </a>
+        <h4 class="text-white font-semibold text-lg mb-6">Liên kết nhanh</h4>
+        <nav class="space-y-4">
+          <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            <span>Trang chủ</span>
+          </a>
+          <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/products">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+            <span>Sản phẩm</span>
+          </a>
+          <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/zen-music">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+            </svg>
+            <span>Nhạc thiền</span>
+          </a>
+            <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/order-history">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+              </svg>
+              <span>Lịch sử đặt hàng</span>
+            </a>
+          <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/contact">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="3 8l7.89 7.89a1 1 0 001.42 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <span>Liên hệ</span>
+          </a>
+        </nav>
+      </div>
 
-    <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/order-history">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-      </svg>
-      <span>Lịch sử đặt hàng</span>
-    </a>
-
-    <a class=" text-gray-400 hover:text-white transition-colors duration-300 flex items-center space-x-2" routerLink="/contact">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="3 8l7.89 7.89a1 1 0 001.42 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-      </svg>
-      <span>Liên hệ</span>
-    </a>
-  </nav>
-</div>
-
-      <!-- Contact Info -->
       <div>
         <h4 class="text-white font-semibold text-lg mb-6">Thông tin liên hệ</h4>
         <div class="space-y-4">
@@ -139,7 +153,6 @@
       </div>
     </div>
 
-    <!-- Bottom Bar -->
     <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
       <p class="text-gray-500 text-sm">
         © 2024 ZenBox. All rights reserved. Made with ❤️ in Vietnam

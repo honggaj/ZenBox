@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-interface Product {
+interface CartItem {
   id: number;
   name: string;
   image: string;
   price: number;
   description: string;
-  quantity?: number;
+  quantity: number;
 }
 
 @Component({
@@ -15,42 +15,53 @@ interface Product {
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'ZenBox Classic',
-      image: 'https://storage.googleapis.com/a1aa/image/503a3ef5-baf6-4142-876d-82e789e57565.jpg',
-      price: 290000,
-      description: 'Hộp Zen cơ bản giúp bạn bắt đầu hành trình thiền định, bao gồm nến thơm và hướng dẫn cơ bản.',
-      quantity: 1
-    },
-    {
-      id: 2,
-      name: 'ZenBox Relax Music',
-      image: 'https://storage.googleapis.com/a1aa/image/d4ffdc87-cace-4813-a669-c067825bc6bf.jpg',
-      price: 390000,
-      description: 'Bao gồm loa mini và bộ nhạc thiền giúp thư giãn sau ngày dài mệt mỏi.',
-      quantity: 1
-    },
-    // Add thêm nếu muốn
-  ];
+export class CartComponent implements OnInit {
+  cartProducts: CartItem[] = []; // Đảm bảo biến này tồn tại
 
-  getTotal() {
-    return this.products.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
+  ngOnInit(): void {
+    this.loadCart();
   }
 
-  increase(product: Product) {
-    product.quantity! += 1;
+  loadCart() {
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      this.cartProducts = JSON.parse(cartData);
+    } else {
+      this.cartProducts = [];
+    }
   }
 
-  decrease(product: Product) {
-    if (product.quantity! > 1) {
-      product.quantity!--;
+  increase(product: CartItem) {
+    const index = this.cartProducts.findIndex(item => item.id === product.id);
+    if (index > -1) {
+      this.cartProducts[index].quantity += 1;
+      this.saveCart();
+    }
+  }
+
+  decrease(product: CartItem) {
+    const index = this.cartProducts.findIndex(item => item.id === product.id);
+    if (index > -1) {
+      if (this.cartProducts[index].quantity > 1) {
+        this.cartProducts[index].quantity -= 1;
+      } else {
+        this.remove(product.id);
+        return;
+      }
+      this.saveCart();
     }
   }
 
   remove(productId: number) {
-    this.products = this.products.filter(p => p.id !== productId);
+    this.cartProducts = this.cartProducts.filter(item => item.id !== productId);
+    this.saveCart();
+  }
+
+  getTotal(): number {
+    return this.cartProducts.reduce((total, product) => total + (product.price * product.quantity), 0);
+  }
+
+  private saveCart() {
+    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
   }
 }

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-products',
   standalone: false,
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
   products = [
@@ -65,4 +65,16 @@ export class ProductsComponent {
       description: 'Bộ nến thơm với tinh dầu thiên nhiên như oải hương, cam ngọt và bạc hà.'
     },
   ];
+
+  addToCart(product: any) {
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const index = cart.findIndex((item: any) => item.id === product.id);
+  if (index > -1) {
+    cart[index].quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert('Đã thêm vào giỏ hàng!');
+}
 }

@@ -9,6 +9,8 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { CheckoutComponent} from './pages/checkout/checkout.component'; // <-- Import CheckoutComponent
+import { OrderHistoryComponent } from './pages/order-history/order-history.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,10 +19,9 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
-  {
-  path: 'product/:id',component: ProductDetailComponent
-  },
-
+  { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'checkout', component: CheckoutComponent }, // <-- THÊM DÒNG NÀY VÀO MẢNG ROUTES
+{ path: 'order-history', component: OrderHistoryComponent },
   { path: '**', redirectTo: '' } // fallback nếu route không tồn tại
 ];
 
